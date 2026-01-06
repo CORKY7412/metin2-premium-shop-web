@@ -1,10 +1,11 @@
+import { ItemDescriptionPage } from "./pages/ItemDescriptionPage"
+import ItemDummyModel1 from "./testing/ItemModels"
+
 function App() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold underline">
-        Test
-      </h1>
+      <ItemDescriptionPage item={ItemDummyModel1} />
     </>
   )
 }
