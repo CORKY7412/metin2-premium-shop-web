@@ -1,12 +1,16 @@
+import { BuyButton } from "../components/Common/BuyButton";
 import type { ShopItem } from "../models/ShopItem"
 
 type ItemDescriptionPageProps = { shopItem: ShopItem }
+
+
 
 export const ItemDescriptionPage = ({ shopItem }: ItemDescriptionPageProps) => {
   const { item, price } = shopItem;
 
   const itemImageUrl = "./public/images/"+ shopItem.imageName +".png";
-
+  const canBuyInQuantity = shopItem.canBuymultipleQuantity 
+  
   return (
     <>
     <div className="max-w-2xl mx-auto shadow-[0px_1px_2px_#000] outline-border">
@@ -71,11 +75,19 @@ export const ItemDescriptionPage = ({ shopItem }: ItemDescriptionPageProps) => {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             
               <div className="md:col-span-2">
-              <div className="bg-red-700 h-28"></div>
+                <div className="h-28">
+                  { canBuyInQuantity && 
+                    <p>Can Buy in Quantity</p>
+                  }
+                </div>
               </div>
 
               
-              <div className="bg-green-700 h-28"></div>
+              <div className="text-center self-center">
+                <p>Jetzt erhältlich für:</p>
+                <span className="text-3xl font-bold text-[#5a3825]"><p>{price}</p></span>
+                <BuyButton shopItem={shopItem} />
+              </div>
             
           </div>
         </div>

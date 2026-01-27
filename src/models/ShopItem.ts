@@ -8,5 +8,6 @@ export interface ShopItem {
     description: string,
     category?: Category,
     features: string[],
-    imageName: string
+    imageName: string,
+    canBuymultipleQuantity: boolean
 }

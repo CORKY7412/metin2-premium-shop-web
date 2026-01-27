@@ -16,7 +16,8 @@ export const SHOP_ITEM_DUMMY_MODEL_1: ShopItem = {
         "Nicht handelbar"
     ],
     category: DUMMY_CATEGORY_1,
-    imageName: "passierschein"
+    imageName: "passierschein",
+    canBuymultipleQuantity: true
 } 
 
 export const SHOP_ITEM_DUMMY_MODEL_2: ShopItem = {
@@ -29,5 +30,6 @@ export const SHOP_ITEM_DUMMY_MODEL_2: ShopItem = {
         "Begrenzte Laufzeit",
     ],
     category: DUMMY_CATEGORY_1,
-    imageName: "drgutschein"
+    imageName: "drgutschein",
+    canBuymultipleQuantity: false
 } 
