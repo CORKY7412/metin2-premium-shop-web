@@ -90,3 +90,10 @@ button {
 .page-image {
   background-image: url(//gf3.geo.gfsrv.net/cdn54/101a61998e4ae0929a7a5512c7840c.jpg);
 }
+
+.metin-logo {
+  background: url("//gf1.geo.gfsrv.net/cdn60/67d69843057d03fa0fd898175c3cf9.png") 0% 50% no-repeat;
+  height: 40px;
+  margin: 0;
+  text-indent: -9999px;
+}

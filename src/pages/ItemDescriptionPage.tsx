@@ -12,7 +12,6 @@ export const ItemDescriptionPage = ({ shopItem }: ItemDescriptionPageProps) => {
 
   const itemImageUrl = "./public/images/"+ shopItem.imageName +".png";
   
-  const [price, setPrice] = useState(shopItem.price)
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const totalPrice = shopItem.price * selectedQuantity;
