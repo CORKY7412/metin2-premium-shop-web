@@ -10,7 +10,7 @@ export const Header = ({}) => {
               <div className="flex gap-3">
                 <div className="metin-logo w-44 items-center"></div>
                 
-                <div className="flex flex-col text-[0.857em]">
+                <div className="flex flex-col text-[0.857em] justify-center">
                   <span>
                     <i className="fa-solid fa-user mr-1.5" />
                     <p className="inline-block"><b><u>ArpyAge</u></b></p>
