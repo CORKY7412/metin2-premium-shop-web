@@ -1,4 +1,3 @@
-// components/ItemCarousel/ItemCarousel.tsx
 import type { ShopItem } from '../../../models/ShopItem';
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
