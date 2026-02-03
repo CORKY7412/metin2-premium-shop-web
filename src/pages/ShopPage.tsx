@@ -8,6 +8,7 @@ import { mockShopItems } from "../testing/ShopItemMocking";
 import { Modal } from "../components/common/Modal/Modal";
 import { ItemDescriptionPage } from "./ItemDescriptionPage";
 import { Navigation } from "../components/common/Navigation/Navigation";
+import { HIGHLIGHTS_CATEGORY, METINPLUS_CATEGORY } from "../testing/CategoryModelMocking";
 
 
 function ShopPage() {
@@ -84,7 +85,7 @@ function ShopPage() {
             <h2 className="item-sample text-[#f2e69f] border-[#E8A314] mb-2.5 border-b ">Beliebte Artikel</h2>
 
             <ItemCarousel
-              items={mockShopItems}
+              isHot={true}
               onItemClick={handleItemClick}
               onBuyClick={handleBuyClick}
             />

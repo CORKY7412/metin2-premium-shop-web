@@ -1,5 +1,5 @@
 import type { ShopItem } from "../models/ShopItem";
-import { DUMMY_CATEGORY_1 } from "./CategoryModelMocking";
+import { HIGHLIGHTS_CATEGORY, METINPLUS_CATEGORY } from "./CategoryModelMocking";
 
 const DUMMY_ID = 23;
 
@@ -14,12 +14,12 @@ export const SHOP_ITEM_DUMMY_MODEL_1: ShopItem = {
         "Passierschein muss dem zuständigen Wächter vorgelegt werden",
         "Nicht handelbar"
     ],
-    category: [DUMMY_CATEGORY_1],
+    category: METINPLUS_CATEGORY,
     imageName: "passierschein",
     maxQuantity: 14,
     quantityPercentDelimeter: 7,
     isNew: false,
-    isHot: false
+    isHot: true
 } 
 
 export const SHOP_ITEM_DUMMY_MODEL_2: ShopItem = {
@@ -31,7 +31,7 @@ export const SHOP_ITEM_DUMMY_MODEL_2: ShopItem = {
         "Gutschein im Wert von 50 DR",
         "Begrenzte Laufzeit",
     ],
-    category: [DUMMY_CATEGORY_1],
+    category: HIGHLIGHTS_CATEGORY,
     imageName: "drgutschein",
     maxQuantity: 1,
     quantityPercentDelimeter: 0,
@@ -42,15 +42,35 @@ export const SHOP_ITEM_DUMMY_MODEL_2: ShopItem = {
 export const SHOP_ITEM_DUMMY_MODEL_3: ShopItem = {
     id: DUMMY_ID + 111,
     name: "Schmuckschatulle",
-    price: 80,
+    price: 99,
     description: "Du willst noch schneller stärker werden? Schau in die Schatulle und sichere dir einen Ring, ein Amulett, einen Lolli oder Trank mit mächtigen Boosts!",
     features: [
         "Zufallstruhe",
         "Chance auf Ring, Amulett, Lolli oder Trank",
         "EXP-Boosts und mehr!"
     ],
-    category: [DUMMY_CATEGORY_1],
-    imageName: "schmuckschatulle ",
+    category: HIGHLIGHTS_CATEGORY,
+    imageName: "schmuckschatulle",
+    maxQuantity: 1,
+    quantityPercentDelimeter: 0,
+    isNew: true,
+    isHot: true
+}
+
+export const SHOP_ITEM_DUMMY_MODEL_4: ShopItem = {
+    id: DUMMY_ID + 1111,
+    name: "Autojagd",
+    price: 49,
+    description: "Hiermit greift dein Charakter bei der automatischen Jagd nicht nur Monster an, sondern er setzt auch ohne dein Zutun Fertigkeiten und Tränke ein. Reihenfolge und Zeitintervall kannst du wählen.",
+    features: [
+        "Automatisches Angreifen von Monstern und Metins",
+        "Automatisches Wiederbeleben",
+        "Automatische Benutzung von Fertigkeiten",
+        "Automatische Verwendung von Tränken",
+        "Aktiviert sich beim nächsten Login"
+    ],
+    category: HIGHLIGHTS_CATEGORY,
+    imageName: "autojagd",
     maxQuantity: 1,
     quantityPercentDelimeter: 0,
     isNew: true,
@@ -61,5 +81,7 @@ export const SHOP_ITEM_DUMMY_MODEL_3: ShopItem = {
 
 export const mockShopItems: ShopItem[] = [
   SHOP_ITEM_DUMMY_MODEL_1,
-  SHOP_ITEM_DUMMY_MODEL_2
+  SHOP_ITEM_DUMMY_MODEL_2,
+  SHOP_ITEM_DUMMY_MODEL_3,
+  SHOP_ITEM_DUMMY_MODEL_4
 ];

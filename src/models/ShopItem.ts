@@ -5,7 +5,7 @@ export interface ShopItem {
     price: number,
     name: string,
     description?: string,
-    category?: Category[],
+    category?: Category,
     features: string[],
     imageName: string,
     maxQuantity: number,

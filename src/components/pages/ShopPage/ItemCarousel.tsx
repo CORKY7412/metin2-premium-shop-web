@@ -2,18 +2,19 @@ import type { ShopItem } from '../../../models/ShopItem';
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import { BuyButton } from '../../common/BuyButton';
+import type { Category } from '../../../models/Category';
+import { mockShopItems } from '../../../testing/ShopItemMocking';
 
 interface ItemCarouselProps {
-  items: ShopItem[];
   onItemClick?: (item: ShopItem) => void;
   onBuyClick?: (item: ShopItem, quantity: number) => void;
+  itemsFromCategory?: Category;
+  isNew?: boolean;
+  isHot?: boolean;
 }
 
-export const ItemCarousel = ({
-  items,
-  onItemClick,
-  onBuyClick
-}: ItemCarouselProps) => {
+export const ItemCarousel = ({onItemClick, onBuyClick, itemsFromCategory, isNew, isHot}: ItemCarouselProps) => {
+
   const [ref] = useKeenSlider<HTMLDivElement>({
     slides: {
       perView: 3.5,
@@ -22,7 +23,14 @@ export const ItemCarousel = ({
     loop: true,
     drag: false
   })
+  
+  const items = mockShopItems.filter(item => {
+    const categoryMatch = itemsFromCategory ? item.category!.id === itemsFromCategory.id : true;
+    const newMatch = isNew ? item.isNew === true : true;
+    const hotMatch = isHot ? item.isHot === true : true;
 
+    return categoryMatch && newMatch && hotMatch;
+  });
 
   return (
     <>
