@@ -12,7 +12,7 @@ export const BuyButton = ({ shopItem, quantity = 1, title = "Kaufen" }: BuyButto
     
     const handlePurchase = async () => {
         try {
-            alert(`Buy ${quantity}x ${shopItem.item.name}!`);
+            alert(`Buy ${quantity}x ${shopItem.name}!`);
         } catch (error) {
             console.error('Error:', error);
         };

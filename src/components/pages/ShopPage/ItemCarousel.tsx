@@ -33,7 +33,7 @@ export const ItemCarousel = ({
 
             <h4 className="mt-0.5 mb-1.5 pt-0.5 text-[16px]">
               <a className="text-[#662d12]"
-                onClick={() => onItemClick && onItemClick(item)}>{item.item.name}</a>
+                onClick={() => onItemClick && onItemClick(item)}>{item.name}</a>
             </h4>
 
             <div className="flex text-[0.85em] mb-1.5 h-24.5 bg-[rgba(0,0,0,0.2)]">

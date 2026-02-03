@@ -8,7 +8,6 @@ type ItemDescriptionPageProps = { shopItem: ShopItem, isInModal?: boolean; }
 
 
 export const ItemDescriptionPage = ({ shopItem, isInModal = true }: ItemDescriptionPageProps) => {
-  const { item } = shopItem;
 
   const itemImageUrl = "/images/items/" + shopItem.imageName + ".png";
 
@@ -26,7 +25,7 @@ export const ItemDescriptionPage = ({ shopItem, isInModal = true }: ItemDescript
         <header className="flex justify-between items-start mb-5">
           <div className="flex-1">
             <h2 className="text-3xl font-bold text-[#5a3825] mb-2">
-              {item.name}
+              {shopItem.name}
             </h2>
           </div>
 
@@ -46,7 +45,7 @@ export const ItemDescriptionPage = ({ shopItem, isInModal = true }: ItemDescript
           <div className="flex items-center justify-center grey-box">
             <img
               src={itemImageUrl}
-              alt={item.name}
+              alt={shopItem.name}
               className="h-auto max-h-44 max-w-44"
             />
           </div>

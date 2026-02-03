@@ -38,7 +38,7 @@ export const CategoryPage = () => {
   };
   
   const handleBuyClick = (item: ShopItem, quantity: number) => {
-    console.log(`Kaufe ${quantity}x ${item.item.name}`);
+    console.log(`Kaufe ${quantity}x ${item.name}`);
   };
   
   const getCategoryTitle = () => {
@@ -67,7 +67,6 @@ export const CategoryPage = () => {
           <div className="mt-2">
             <Navigation 
               activeTab={categoryId || 'all'}
-              onTabChange={() => {}}
             />
           </div>
           

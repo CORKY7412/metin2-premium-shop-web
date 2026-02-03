@@ -27,7 +27,7 @@ function ShopPage() {
   };
 
   const handleBuyClick = (item: ShopItem, quantity: number) => {
-    console.log(`Kaufe ${quantity}x ${item.item.name}`);
+    console.log(`Kaufe ${quantity}x ${item.name}`);
   };
 
   const handleTabChange = (tabId: string) => {
@@ -42,8 +42,7 @@ function ShopPage() {
 
         <div className="pr-5 pl-5">
           <div className="mt-2">
-            <Navigation activeTab={activeTab}
-                        onTabChange={handleTabChange} />
+            <Navigation activeTab={activeTab} />
           </div>
 
 

@@ -8,10 +8,9 @@ interface NavigationTab {
 
 interface NavigationProps {
     activeTab?: string;
-    onTabChange?: (tabId: string) => void;
 }
 
-export const Navigation = ({ activeTab = 'all', onTabChange }: NavigationProps) => {
+export const Navigation = ({ activeTab = 'all' }: NavigationProps) => {
 
     const location = useLocation();
 
