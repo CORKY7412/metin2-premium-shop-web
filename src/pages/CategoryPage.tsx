@@ -7,6 +7,7 @@ import { Navigation } from "../components/common/Navigation/Navigation";
 import { ItemCard } from "../components/common/ItemCard";
 import { Modal } from "../components/common/Modal/Modal";
 import { ItemDescriptionPage } from "./ItemDescriptionPage";
+import { SubNavigation } from "../components/pages/CategoryPage/SubNavigation";
 export const CategoryPage = () => {
 
   const { categoryId } = useParams<{ categoryId: string }>();
@@ -75,17 +76,22 @@ export const CategoryPage = () => {
             <h2 className="item-sample text-[#f2e69f] border-[#E8A314] mb-2.5 border-b">
               {getCategoryTitle()}
             </h2>
-            
-            {filteredItems.length > 0 ? (
-              <ItemCard
-                onItemClick={handleItemClick}
-                onBuyClick={handleBuyClick}
-              />
-            ) : (
-              <p className="text-[#f2e69f] text-center py-10">
-                Keine Artikel in dieser Kategorie gefunden.
-              </p>
-            )}
+
+            {/* Sub Nav */}
+            <div className="flex">
+              <SubNavigation />
+              
+              {filteredItems.length > 0 ? (
+                <ItemCard
+                  onItemClick={handleItemClick}
+                  onBuyClick={handleBuyClick}
+                />
+              ) : (
+                <p className="text-[#f2e69f] text-center py-10">
+                  Keine Artikel in dieser Kategorie gefunden.
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </div>
