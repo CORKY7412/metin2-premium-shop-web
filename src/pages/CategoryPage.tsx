@@ -78,7 +78,6 @@ export const CategoryPage = () => {
             
             {filteredItems.length > 0 ? (
               <ItemCard
-                items={filteredItems}
                 onItemClick={handleItemClick}
                 onBuyClick={handleBuyClick}
               />
