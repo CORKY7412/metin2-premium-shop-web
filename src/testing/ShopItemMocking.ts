@@ -92,7 +92,7 @@ export const SHOP_ITEM_DUMMY_MODEL_5: ShopItem = {
     "Erhöht die Chance auf erfolgreiche Veredelung",
     "Für Waffen und Rüstungen"
   ],
-  category: VEREDELUNGSSTEINE_CATEGORY,
+  category: HIGHLIGHTS_CATEGORY,
   imageName: "veredelungsstein1",
   maxQuantity: 50,
   quantityPercentDelimeter: 10,
@@ -109,7 +109,7 @@ export const SHOP_ITEM_DUMMY_MODEL_6: ShopItem = {
     "Verhindert Itemverlust bei gescheiterter Veredelung",
     "Einmaliger Gebrauch"
   ],
-  category: SEGENSSCHRIFTROLLEN_CATEGORY,
+  category: HIGHLIGHTS_CATEGORY,
   imageName: "segensschriftrolle",
   maxQuantity: 20,
   quantityPercentDelimeter: 5,
@@ -127,7 +127,7 @@ export const SHOP_ITEM_DUMMY_MODEL_7: ShopItem = {
     "Einzigartige Animationen",
     "Handelbar"
   ],
-  category: KOSTUEME_CATEGORY,
+  category: HIGHLIGHTS_CATEGORY,
   imageName: "drachenkostuem",
   maxQuantity: 1,
   quantityPercentDelimeter: 0,
@@ -156,5 +156,9 @@ export const mockShopItems: ShopItem[] = [
   SHOP_ITEM_DUMMY_MODEL_1,
   SHOP_ITEM_DUMMY_MODEL_2,
   SHOP_ITEM_DUMMY_MODEL_3,
-  SHOP_ITEM_DUMMY_MODEL_4,
+  SHOP_ITEM_DUMMY_MODEL_5,
+  SHOP_ITEM_DUMMY_MODEL_6,
+  SHOP_ITEM_DUMMY_MODEL_7,
+  SHOP_ITEM_DUMMY_MODEL_8,
+
 ];

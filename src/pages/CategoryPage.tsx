@@ -123,11 +123,13 @@ export const CategoryPage = () => {
               />
               
               {filteredItems.length > 0 ? (
-                <ItemCard
-                  items={filteredItems}
-                  onItemClick={handleItemClick}
-                  onBuyClick={handleBuyClick}
-                />
+                <div className="overflow-y-auto h-100">
+                  <ItemCard
+                    items={filteredItems}
+                    onItemClick={handleItemClick}
+                    onBuyClick={handleBuyClick}
+                  />
+                </div>
               ) : (
                 <p className="text-[#f2e69f] text-center py-10">
                   Keine Artikel in dieser Kategorie gefunden.
