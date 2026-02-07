@@ -7,7 +7,7 @@ import { Navigation } from "../components/common/Navigation/Navigation";
 
 export const TombolaPage = () => {
   const [availableTickets, setAvailableTickets] = useState(3);
-  const [selectedTier, setSelectedTier] = useState<TombolaTier>(1);
+  const [selectedTier, setSelectedTier] = useState<TombolaTier>(2);
 
   const getTierItems = () => {
     switch (selectedTier) {
