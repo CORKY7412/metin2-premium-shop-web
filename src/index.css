@@ -1,4 +1,3 @@
-/* index.css */
 @import "tailwindcss";
 
 html {
@@ -267,8 +266,6 @@ button {
 .keen-slider:not([data-keen-slider-disabled]) {
   user-select: auto !important;
 }
-
-/* src/index.css - Füge das hinzu */
 
 @keyframes modal-in {
   from {

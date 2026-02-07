@@ -8,7 +8,6 @@ import { mockShopItems } from '../../testing/ShopItemMocking';
 interface ItemCardProps {
   items?: ShopItem[];
   onItemClick?: (item: ShopItem) => void;
-  onBuyClick?: (item: ShopItem, quantity: number) => void;
   itemsFromCategory?: Category;
   onlyNew?: boolean;
   onlyHot?: boolean;
@@ -18,7 +17,6 @@ interface ItemCardProps {
 export const ItemCard = ({
   items: itemsProp,
   onItemClick,
-  onBuyClick,
   itemsFromCategory,
   onlyNew,
   onlyHot,
@@ -61,6 +59,7 @@ export const ItemCard = ({
       },
     },
   });
+
 
   const items = itemsProp ?? mockShopItems.filter(item => {
     const categoryMatch = itemsFromCategory ? item.category!.id === itemsFromCategory.id : true;

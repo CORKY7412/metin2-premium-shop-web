@@ -1,0 +1,1 @@
+export { Tombola } from './Tombola';

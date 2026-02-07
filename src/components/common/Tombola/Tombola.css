@@ -1,0 +1,390 @@
+.tombola-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tombola-wrapper {
+  background: url("/images/tombola_bg.png");
+  padding: 1rem;
+  box-shadow: 0 1px 2px #000;
+  border: 1px solid #662d12;
+  position: relative;
+  background-position-x: center;
+}
+
+@media (min-width: 640px) {
+  .tombola-wrapper {
+    padding: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .tombola-wrapper {
+    padding: 1.5rem;
+  }
+}
+
+.tombola-wheel {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.tombola-center-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.tombola-arrow {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 30px solid #e8a314;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.tombola-items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .tombola-items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+.tombola-slot {
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid #662d12;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.tombola-slot-penalty {
+  background: rgba(139, 0, 0, 0.2);
+  border-color: #8b0000;
+}
+
+@media (min-width: 640px) {
+  .tombola-slot {
+    padding: 0.625rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .tombola-slot {
+    padding: 0.75rem;
+  }
+}
+
+.tombola-slot:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tombola-slot-active {
+  background: linear-gradient(135deg, #e8a314 0%, #f2e69f 100%);
+  border-color: #e8a314;
+  box-shadow: 0 0 20px rgba(232, 163, 20, 0.6), inset 0 0 20px rgba(242, 230, 159, 0.4);
+  transform: scale(1.05);
+  z-index: 5;
+}
+
+.tombola-slot-penalty.tombola-slot-active {
+  background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+  border-color: #dc143c;
+  box-shadow: 0 0 20px rgba(220, 20, 60, 0.6), inset 0 0 20px rgba(139, 0, 0, 0.4);
+}
+
+.tombola-spinning .tombola-slot-active {
+  animation: slot-flash 0.08s ease-in-out;
+}
+
+@keyframes slot-flash {
+  0%, 100% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.tombola-slot-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tombola-item-image {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tombola-item-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.tombola-slot-active .tombola-item-image img {
+  filter: drop-shadow(0 0 8px rgba(232, 163, 20, 0.8));
+  animation: item-glow 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes item-glow {
+  from {
+    filter: drop-shadow(0 0 8px rgba(232, 163, 20, 0.8));
+  }
+  to {
+    filter: drop-shadow(0 0 15px rgba(242, 230, 159, 1));
+  }
+}
+
+.tombola-item-name {
+  color: #f2e69f;
+  font-size: 0.75rem;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+  min-height: 2.4em;
+  display: flex;
+  align-items: center;
+}
+
+.tombola-slot-active .tombola-item-name {
+  color: #3c1e16;
+  text-shadow: 0 1px 2px rgba(242, 230, 159, 0.5);
+}
+
+.tombola-item-chance {
+  color: #999;
+  font-size: 0.7rem;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.tombola-slot-active .tombola-item-chance {
+  color: #662d12;
+  font-weight: bold;
+}
+
+.tombola-controls {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.tombola-spin-btn {
+  min-width: 200px;
+  font-size: 1.1rem;
+}
+
+.tombola-last-reward {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #662d12;
+  text-align: center;
+}
+
+.tombola-reward-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fade-in 0.3s ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tombola-reward-popup {
+  background: url("/images/item_bg.jpg");
+  border: 3px solid #e8a314;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 40px rgba(232, 163, 20, 0.4);
+  max-width: 400px;
+  width: 90%;
+  animation: reward-popup-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+@keyframes reward-popup-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.tombola-reward-header {
+  background: linear-gradient(135deg, #e8a314 0%, #f2e69f 100%);
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 2px solid #662d12;
+}
+
+.tombola-reward-header h3 {
+  margin: 0;
+  color: #3c1e16;
+  font-size: 1.5rem;
+  text-shadow: 0 1px 2px rgba(242, 230, 159, 0.5);
+}
+
+.tombola-reward-content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.tombola-reward-image {
+  width: 128px;
+  height: 128px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: reward-image-float 2s ease-in-out infinite;
+}
+
+@keyframes reward-image-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.tombola-reward-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(232, 163, 20, 0.8));
+}
+
+.tombola-reward-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #e8a314;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.tombola-reward-description {
+  color: #f2e69f;
+  font-size: 0.9rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.tombola-reward-actions {
+  padding: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.tombola-penalty-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: #dc143c;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.tombola-penalty-icon-large {
+  width: 128px;
+  height: 128px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  color: #dc143c;
+  filter: drop-shadow(0 0 20px rgba(220, 20, 60, 0.8));
+  animation: penalty-shake 0.5s ease-in-out;
+}
+
+@keyframes penalty-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px) rotate(-5deg); }
+  75% { transform: translateX(10px) rotate(5deg); }
+}
+
+.tombola-reward-popup-penalty .tombola-reward-header {
+  background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+}
+
+.tombola-reward-popup-penalty {
+  border-color: #dc143c;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 40px rgba(220, 20, 60, 0.4);
+}
+
+@media (max-width: 640px) {
+  .tombola-wrapper {
+    padding: 1rem;
+  }
+
+  .tombola-item-image {
+    width: 48px;
+    height: 48px;
+  }
+
+  .tombola-item-name {
+    font-size: 0.65rem;
+  }
+
+  .tombola-spin-btn {
+    min-width: 150px;
+    font-size: 1rem;
+  }
+
+  .tombola-reward-image {
+    width: 96px;
+    height: 96px;
+  }
+}

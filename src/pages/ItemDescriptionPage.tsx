@@ -21,7 +21,6 @@ export const ItemDescriptionPage = ({ shopItem, isInModal = true }: ItemDescript
     `}>
       <div className="mt-3 sm:mt-4 md:mt-5 p-3 sm:p-4 md:p-5 bg-[#eade9e]">
 
-        {/* Header */}
         <header className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0 mb-3 sm:mb-4 md:mb-5">
           <div className="flex-1">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#5a3825] mb-1 sm:mb-2 leading-tight">

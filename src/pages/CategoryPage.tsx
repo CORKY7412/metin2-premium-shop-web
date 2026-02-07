@@ -66,10 +66,6 @@ export const CategoryPage = () => {
     setSelectedItem(null);
   };
 
-  const handleBuyClick = (item: ShopItem, quantity: number) => {
-    console.log(`Kaufe ${quantity}x ${item.name}`);
-  };
-
   const handleCategoryClick = (categoryId: number) => {
     setSearchParams({ cat: categoryId.toString() });
   };
@@ -126,7 +122,6 @@ export const CategoryPage = () => {
                   <ItemCard
                     items={filteredItems}
                     onItemClick={handleItemClick}
-                    onBuyClick={handleBuyClick}
                   />
                 </div>
               ) : (

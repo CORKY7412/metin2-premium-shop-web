@@ -25,9 +25,7 @@ function ShopPage() {
     setSelectedItem(null);
   };
 
-  const handleBuyClick = (item: ShopItem, quantity: number) => {
-    console.log(`Kaufe ${quantity}x ${item.name}`);
-  };
+  setActiveTab
 
   return (
     <>
@@ -81,7 +79,6 @@ function ShopPage() {
               isCarousel={true}
               onlyHot={true}
               onItemClick={handleItemClick}
-              onBuyClick={handleBuyClick}
             />
           </div>
         </div>

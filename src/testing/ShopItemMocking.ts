@@ -4,12 +4,6 @@ import {
   METINPLUS_CATEGORY,
   REDUZIERT_CATEGORY,
   OFFERS_CATEGORY,
-  PAKETE_CATEGORY,
-  VEREDELN_CATEGORY,
-  VEREDELUNGSSTEINE_CATEGORY,
-  SEGENSSCHRIFTROLLEN_CATEGORY,
-  KOSMETIK_CATEGORY,
-  KOSTUEME_CATEGORY,
   CHARACTER_CATEGORY
 } from "./CategoryModelMocking";
 
@@ -85,15 +79,15 @@ export const SHOP_ITEM_DUMMY_MODEL_4: ShopItem = {
 
 export const SHOP_ITEM_DUMMY_MODEL_5: ShopItem = {
   id: DUMMY_ID + 5,
-  name: "Veredelungsstein+1",
+  name: "Gegenstand verzaubern",
   price: 15,
-  description: "Verbessere deine Ausrüstung mit diesem mächtigen Veredelungsstein.",
+  description: "Tausche mithilfe von Gegenstand verzaubern die bisherigen Boni eines deiner Ausrüstungsgegenstände gegen die gleiche Anzahl neuer Boni aus. Diese werden zufällig bestimmt.",
   features: [
-    "Erhöht die Chance auf erfolgreiche Veredelung",
-    "Für Waffen und Rüstungen"
+    "Tauscht 1x Boni eines Items gegen zufällige neue aus",
+    "Gilt nur für die Boni 1-5"
   ],
   category: HIGHLIGHTS_CATEGORY,
-  imageName: "veredelungsstein1",
+  imageName: "verzaubern",
   maxQuantity: 50,
   quantityPercentDelimeter: 10,
   isNew: false,
@@ -110,7 +104,7 @@ export const SHOP_ITEM_DUMMY_MODEL_6: ShopItem = {
     "Einmaliger Gebrauch"
   ],
   category: HIGHLIGHTS_CATEGORY,
-  imageName: "segensschriftrolle",
+  imageName: "segi",
   maxQuantity: 20,
   quantityPercentDelimeter: 5,
   isNew: false,
@@ -119,16 +113,17 @@ export const SHOP_ITEM_DUMMY_MODEL_6: ShopItem = {
 
 export const SHOP_ITEM_DUMMY_MODEL_7: ShopItem = {
   id: DUMMY_ID + 7,
-  name: "Drachenkostüm",
+  name: "Atlantiskrieger+ ",
   price: 199,
-  description: "Verwandle dich in einen mächtigen Drachen!",
+  description: "Eine schlachtenerprobte Rüstung für alle mächtigen Krieger der Tiefen. Eine Atlantiskrone+ oder ein Atlantishelm+, Kneifi und eine Heldenmedaille verleihen dir jeweils zusätzliche Set-Boni.",
   features: [
-    "Permanentes Kostüm",
-    "Einzigartige Animationen",
-    "Handelbar"
+    "1 bis 3 zufällige Boni",
+    "Kostüm mit Set-Bonus",
+    "Kostüm für männliche Charaktere",
+    "Begrenzte Laufzeit ab Kauf"
   ],
   category: HIGHLIGHTS_CATEGORY,
-  imageName: "drachenkostuem",
+  imageName: "atlantisbrust",
   maxQuantity: 1,
   quantityPercentDelimeter: 0,
   isNew: true,
@@ -137,15 +132,15 @@ export const SHOP_ITEM_DUMMY_MODEL_7: ShopItem = {
 
 export const SHOP_ITEM_DUMMY_MODEL_8: ShopItem = {
   id: DUMMY_ID + 8,
-  name: "Spezial-Highlight-Paket",
+  name: "Ahnenwächter-Schwert+",
   price: 299,
-  description: "Ein besonderes Paket nur in der Highlight-Kategorie!",
+  description: "",
   features: [
     "Exklusiver Inhalt",
     "Begrenzte Verfügbarkeit"
   ],
   category: HIGHLIGHTS_CATEGORY,
-  imageName: "spezialpaket",
+  imageName: "ahnenwaechterschwert",
   maxQuantity: 1,
   quantityPercentDelimeter: 0,
   isNew: true,
