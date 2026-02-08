@@ -6,6 +6,9 @@ import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { CategoryPage } from './pages/CategoryPage.tsx'
 import { TombolaPage } from './pages/TombolaPage.tsx'
+import { CartPage } from './pages/CartPage.tsx'
+import { CartProvider } from './context/CartContext.tsx'
+import { UserProvider } from './context/UserContext.tsx'
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -14,11 +17,18 @@ const router = createBrowserRouter([
   },
   { path: "/tombola",
     element: <TombolaPage />
+  },
+  { path: "/cart",
+    element: <CartPage />
   }
 ]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
+    </UserProvider>
   </StrictMode>
 )

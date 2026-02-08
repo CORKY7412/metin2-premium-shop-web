@@ -4,9 +4,10 @@ import { tombolaTier1Items, tombolaTier2Items, tombolaTier3Items } from "../test
 import type { TombolaReward, TombolaTier } from "../models/TombolaItem";
 import { Header } from "../components/pages/ShopPage/Header";
 import { Navigation } from "../components/common/Navigation/Navigation";
+import { useUser } from "../context/UserContext";
 
 export const TombolaPage = () => {
-  const [availableTickets, setAvailableTickets] = useState(3);
+  const { tombolaTickets, removeTombolaTickets } = useUser();
   const [selectedTier, setSelectedTier] = useState<TombolaTier>(2);
 
   const getTierItems = () => {
@@ -18,7 +19,7 @@ export const TombolaPage = () => {
   };
 
   const handleSpin = (reward: TombolaReward) => {
-    setAvailableTickets(prev => Math.max(0, prev - selectedTier));
+    removeTombolaTickets(selectedTier);
 
     if (reward.item.isPenalty) {
       console.log("Strafe:", reward.item.penaltyText);
@@ -65,14 +66,14 @@ export const TombolaPage = () => {
 
         <div className="mt-3 sm:mt-4 md:mt-5 pb-5">
           <h2 className="item-sample text-[#f2e69f] border-[#E8A314] mb-3 sm:mb-4 border-b text-lg sm:text-xl md:text-2xl">
-            Glücksrad
+            Tombola
           </h2>
 
           <div className="bg-[rgba(0,0,0,0.3)] p-3 sm:p-4 mb-4 sm:mb-5 border-2 border-[#e8a314] text-center">
             <div className="flex items-center justify-center gap-2 mb-2">
               <i className="fa-solid fa-ticket text-[#e8a314] text-xl sm:text-2xl"></i>
               <span className="text-[#f2e69f] text-lg sm:text-xl font-bold">
-                Verfügbare Tickets: {availableTickets}
+                Verfügbare Tickets: {tombolaTickets}
               </span>
             </div>
             <p className="text-xs sm:text-sm text-[#f2e69f]">
@@ -115,7 +116,7 @@ export const TombolaPage = () => {
             items={getTierItems()}
             ticketCost={selectedTier}
             onSpin={handleSpin}
-            availableTickets={availableTickets}
+            availableTickets={tombolaTickets}
           />
 
           <div className="mt-4 sm:mt-5 p-3 sm:p-4 bg-[rgba(0,0,0,0.2)] border border-[#662d12]">

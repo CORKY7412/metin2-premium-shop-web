@@ -11,6 +11,7 @@ export const buildCategoryTree = (items: ShopItem[]): CategoryWithSubs[] => {
   const mainCategories = new Map<number, CategoryWithSubs>();
 
   items.forEach(item => {
+
     if (item.category) {
       categoryMap.set(item.category.id, item.category);
 
@@ -21,6 +22,7 @@ export const buildCategoryTree = (items: ShopItem[]): CategoryWithSubs[] => {
   });
 
   categoryMap.forEach(category => {
+    
     if (category.parentCategory) {
       const parentId = category.parentCategory.id;
 

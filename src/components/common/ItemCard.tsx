@@ -1,7 +1,7 @@
 import type { ShopItem } from '../../models/ShopItem';
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
-import { BuyButton } from './BuyButton';
+import { AddToCartButton } from './AddToCartButton';
 import type { Category } from '../../models/Category';
 import { mockShopItems } from '../../testing/ShopItemMocking';
 
@@ -111,7 +111,7 @@ export const ItemCard = ({
               </div>
             </div>
             <div className="w-full sm:w-auto sm:max-w-30 md:w-27.75 sm:float-right">
-              <BuyButton shopItem={item} title={item.price.toString()} />
+              <AddToCartButton shopItem={item} title={`${item.price} DR`} />
             </div>
           </div>
         ))}
