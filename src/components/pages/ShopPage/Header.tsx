@@ -40,7 +40,9 @@ export const Header = () => {
             </button>
           </Link>
 
-          <Button title="Gambeln" className="base-green-btn min-w-20 sm:min-w-28 md:min-w-40 uppercase h-7 sm:h-8 text-xs sm:text-sm md:text-base" />
+          <Link to="/tombola">
+            <Button title="Gambeln" className="base-green-btn min-w-20 sm:min-w-28 md:min-w-40 uppercase h-7 sm:h-8 text-xs sm:text-sm md:text-base" />
+          </Link>
         </div>
       </div>
     </div>
