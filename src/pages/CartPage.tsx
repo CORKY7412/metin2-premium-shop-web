@@ -12,7 +12,7 @@ import { generateRewards } from "../utils/rewardsService";
 import type { PurchaseReward, CartItem } from "../models/Cart";
 
 export const CartPage = () => {
-  const { cartItems, removeFromCart, updateQuantity, clearCart, getTotalPrice } = useCart();
+  const { cartItems, removeFromCart, incrementQuantity, decrementQuantity, clearCart, getTotalPrice } = useCart();
   const { yabbieCoins, addYabbieCoins, addTombolaTickets } = useUser();
   const [showRewardPopup, setShowRewardPopup] = useState(false);
   const [currentRewards, setCurrentRewards] = useState<PurchaseReward[]>([]);
@@ -75,7 +75,8 @@ export const CartPage = () => {
                     cartItem={cartItem}
                     onPurchase={handlePurchaseSingle}
                     onRemove={removeFromCart}
-                    onUpdateQuantity={updateQuantity}
+                    onIncrementQuantity={incrementQuantity}
+                    onDecrementQuantity={decrementQuantity}
                   />
                 ))}
               </div>

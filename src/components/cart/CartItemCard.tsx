@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "../common/Button";
 import type { CartItem } from "../../models/Cart";
 
@@ -5,16 +6,37 @@ interface CartItemCardProps {
   cartItem: CartItem;
   onPurchase: (item: CartItem) => void;
   onRemove: (id: number) => void;
-  onUpdateQuantity: (id: number, quantity: number) => void;
+  onIncrementQuantity: (id: number) => void;
+  onDecrementQuantity: (id: number) => void;
 }
 
 export const CartItemCard = ({
   cartItem,
   onPurchase,
   onRemove,
-  onUpdateQuantity,
+  onIncrementQuantity,
+  onDecrementQuantity,
 }: CartItemCardProps) => {
   const { shopItem, quantity } = cartItem;
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const handleIncrement = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isUpdating || quantity >= shopItem.maxQuantity) return;
+    setIsUpdating(true);
+    onIncrementQuantity(shopItem.id);
+    setTimeout(() => setIsUpdating(false), 150);
+  };
+
+  const handleDecrement = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isUpdating || quantity <= 1) return;
+    setIsUpdating(true);
+    onDecrementQuantity(shopItem.id);
+    setTimeout(() => setIsUpdating(false), 150);
+  };
 
   return (
     <div className="bg-[rgba(0,0,0,0.3)] border border-[#662d12] p-3 sm:p-4">
@@ -37,9 +59,9 @@ export const CartItemCard = ({
           {shopItem.maxQuantity > 1 ? (
             <div className="flex items-center gap-2 mb-3">
               <button
-                onClick={() => onUpdateQuantity(shopItem.id, quantity - 1)}
+                onClick={handleDecrement}
                 className="quantity-btn px-3 py-1"
-                disabled={quantity <= 1}
+                disabled={isUpdating || quantity <= 1}
               >
                 -
               </button>
@@ -47,9 +69,9 @@ export const CartItemCard = ({
                 {quantity}
               </span>
               <button
-                onClick={() => onUpdateQuantity(shopItem.id, quantity + 1)}
+                onClick={handleIncrement}
                 className="quantity-btn px-3 py-1"
-                disabled={quantity >= shopItem.maxQuantity}
+                disabled={isUpdating || quantity >= shopItem.maxQuantity}
               >
                 +
               </button>

@@ -7,6 +7,8 @@ interface CartContextType {
   addToCart: (item: ShopItem, quantity?: number) => void;
   removeFromCart: (itemId: number) => void;
   updateQuantity: (itemId: number, quantity: number) => void;
+  incrementQuantity: (itemId: number) => void;
+  decrementQuantity: (itemId: number) => void;
   clearCart: () => void;
   getTotalItems: () => number;
   getTotalPrice: () => number;
@@ -51,6 +53,26 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const incrementQuantity = (itemId: number) => {
+    setCartItems(prev =>
+      prev.map(ci =>
+        ci.shopItem.id === itemId
+          ? { ...ci, quantity: Math.min(ci.quantity + 1, ci.shopItem.maxQuantity) }
+          : ci
+      )
+    );
+  };
+
+  const decrementQuantity = (itemId: number) => {
+    setCartItems(prev =>
+      prev.map(ci =>
+        ci.shopItem.id === itemId
+          ? { ...ci, quantity: Math.max(1, ci.quantity - 1) }
+          : ci
+      )
+    );
+  };
+
   const clearCart = () => {
     setCartItems([]);
   };
@@ -70,6 +92,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         addToCart,
         removeFromCart,
         updateQuantity,
+        incrementQuantity,
+        decrementQuantity,
         clearCart,
         getTotalItems,
         getTotalPrice,

@@ -60,10 +60,20 @@ button {
   transition: all 0.2s;
   font-size: 16px;
   font-weight: bold;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
-.quantity-btn:hover {
+.quantity-btn:hover:not(:disabled) {
   opacity: 0.9;
+}
+
+.quantity-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .quantity-btn-active {

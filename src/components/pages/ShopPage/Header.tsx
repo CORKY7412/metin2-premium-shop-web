@@ -11,9 +11,9 @@ export const Header = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 h-10 sm:h-12">
         <div className="md:col-span-1">
           <div className="flex gap-1.5 sm:gap-2 md:gap-3">
-            <div className="metin-logo w-24 sm:w-32 md:w-44 items-center shrink-0"></div>
+            <div className="metin-logo w-full sm:w-32 md:w-44 items-center shrink-0"></div>
 
-            <div className="flex flex-col text-[0.7em] sm:text-[0.8em] md:text-[0.857em] justify-center">
+            <div className="flex flex-col text-[0.7em] sm:text-[0.8em] md:text-[0.857em] justify-center invisible sm:visible">
               <span className="whitespace-nowrap">
                 <i className="fa-solid fa-user mr-1 sm:mr-1.5" />
                 <p className="inline-block"><b><u>ArpyAge</u></b></p>
