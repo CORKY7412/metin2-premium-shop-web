@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { BuyButton } from "../components/common/BuyButton";
 import type { ShopItem } from "../models/ShopItem"
 import { QuantitySelection } from "../components/pages/ItemDescriptionPage/QuantitySelection";
+import { AddToCartButton } from "../components/common/AddToCartButton";
 
 type ItemDescriptionPageProps = { shopItem: ShopItem, isInModal?: boolean; }
 
@@ -82,7 +82,7 @@ export const ItemDescriptionPage = ({ shopItem, isInModal = true }: ItemDescript
             <div className="text-center">
               <p className="text-xs sm:text-sm mb-1">Jetzt erhältlich für:</p>
               <p className="text-2xl sm:text-3xl font-bold text-[#5a3825] mb-2">{totalPrice} DR</p>
-              <BuyButton shopItem={shopItem} />
+              <AddToCartButton shopItem={shopItem} title="Kaufen" quantity={selectedQuantity} />
             </div>
           </div>
         </div>

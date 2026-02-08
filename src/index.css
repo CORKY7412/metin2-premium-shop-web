@@ -113,6 +113,12 @@ button {
   }
 }
 
+@media (max-width: 768px) {
+  .page-image {
+    min-height: 100vh;
+  }
+}
+
 .page-image {
   background-image: url("/images/bg.jpg");
 }
