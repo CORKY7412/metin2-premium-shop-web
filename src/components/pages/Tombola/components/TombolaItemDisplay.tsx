@@ -43,7 +43,7 @@ export const TombolaItemDisplay = ({
       <img
         src={`/images/items/${item.shopItem!.imageName}.png`}
         alt={item.shopItem!.name}
-        className={sizeClasses[size]}
+        className={`${sizeClasses[size]} m-auto`}
       />
       {showName && (
         <span className="font-bold text-[#f2e69f]">{item.shopItem!.name}</span>
