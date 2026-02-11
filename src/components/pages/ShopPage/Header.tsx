@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { Button } from "../../common/Button";
 import { Icon } from "../../common/Icon";
 import { useCart } from "../../../context/CartContext";
+import { useUser } from "../../../context/UserContext";
 
 export const Header = () => {
   const { getTotalItems } = useCart();
+  const { drBalance } = useUser();
   const totalItems = getTotalItems();
 
   return (
@@ -29,6 +31,13 @@ export const Header = () => {
         </div>
 
         <div className="md:col-span-2 flex justify-end items-center gap-2 sm:gap-3 md:gap-4">
+          <div className="flex items-center gap-1 sm:gap-1.5 invisible sm:visible">
+            <Icon icon="coins" className="text-[#e8a314] text-base sm:text-lg" />
+            <span className="text-[#f2e69f] text-xs sm:text-sm font-bold whitespace-nowrap">
+              {drBalance} DR
+            </span>
+          </div>
+
           <Link to="/cart" className="relative">
             <button className="text-[#f2e69f] hover:text-[#e8a314] transition-colors relative">
               <Icon icon="shopping-cart" className="text-xl sm:text-2xl" />

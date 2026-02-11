@@ -9,34 +9,40 @@ import { CartItemCard } from "../components/cart/CartItemCard";
 import { RewardInfoBox } from "../components/cart/RewardInfoBox";
 import { RewardPopup } from "../components/cart/RewardPopup";
 import { Icon } from "../components/common/Icon";
-import { generateRewards } from "../utils/rewardsService";
+import { api } from "../services/api";
 import type { PurchaseReward, CartItem } from "../models/Cart";
 
 export const CartPage = () => {
   const { cartItems, removeFromCart, incrementQuantity, decrementQuantity, clearCart, getTotalPrice } = useCart();
-  const { yabbieCoins, addYabbieCoins, addTombolaTickets } = useUser();
+  const { userId, drBalance, yabbieCoins, refreshUser } = useUser();
   const [showRewardPopup, setShowRewardPopup] = useState(false);
   const [currentRewards, setCurrentRewards] = useState<PurchaseReward[]>([]);
+  const [isPurchasing, setIsPurchasing] = useState(false);
 
-  const handlePurchase = (items: CartItem[]) => {
-    const rewards = generateRewards(items);
+  const handlePurchase = async (items: CartItem[]) => {
+    if (isPurchasing) return;
 
-    const totalYabbieCoins = rewards
-      .filter(r => r.type === 'yabbie_coins')
-      .reduce((sum, r) => sum + (r.amount || 0), 0);
-
-    if (totalYabbieCoins > 0) {
-      addYabbieCoins(totalYabbieCoins);
+    const cost = items.reduce((sum, i) => sum + i.shopItem.price * i.quantity, 0);
+    if (cost > drBalance) {
+      alert(`Nicht genug DR-Guthaben. Benötigt: ${cost} DR, Vorhanden: ${drBalance} DR`);
+      return;
     }
 
-    const tombolaReward = rewards.find(r => r.type === 'tombola_ticket');
-    if (tombolaReward?.amount) 
-      addTombolaTickets(tombolaReward.amount);
-    
-    setCurrentRewards(rewards);
-    setShowRewardPopup(true);
+    setIsPurchasing(true);
 
-    items.forEach(item => removeFromCart(item.shopItem.id));
+    try {
+      const result = await api.purchase(userId, items);
+
+      setCurrentRewards(result.rewards);
+      setShowRewardPopup(true);
+      items.forEach(item => removeFromCart(item.shopItem.id));
+
+      await refreshUser();
+    } catch (err) {
+      console.error('Kauf fehlgeschlagen:', err);
+    } finally {
+      setIsPurchasing(false);
+    }
   };
 
   const handlePurchaseAll = () => handlePurchase(cartItems);
@@ -57,11 +63,19 @@ export const CartPage = () => {
           </h2>
 
           <div className="bg-[rgba(0,0,0,0.3)] p-3 sm:p-4 mb-4 sm:mb-5 border-2 border-[#e8a314] text-center">
-            <div className="flex items-center justify-center gap-2">
-              <Icon icon="coins" className="text-[#e8a314] text-xl sm:text-2xl" />
-              <span className="text-[#f2e69f] text-lg sm:text-xl font-bold">
-                Yabbie-Münzen: {yabbieCoins}
-              </span>
+            <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap">
+              <div className="flex items-center gap-2">
+                <Icon icon="coins" className="text-[#e8a314] text-xl sm:text-2xl" />
+                <span className="text-[#f2e69f] text-lg sm:text-xl font-bold">
+                  {drBalance} DR
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Icon icon="coins" className="text-[#e8a314] text-xl sm:text-2xl" />
+                <span className="text-[#f2e69f] text-lg sm:text-xl font-bold">
+                  Yabbie-Münzen: {yabbieCoins}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -101,7 +115,7 @@ export const CartPage = () => {
                       title="Alles leeren"
                     />
                     <Button
-                      title="Alle kaufen"
+                      title={isPurchasing ? "Wird verarbeitet..." : "Alle kaufen"}
                       onClick={handlePurchaseAll}
                       className="base-green-btn flex-1 sm:flex-none px-6 text-base"
                     />

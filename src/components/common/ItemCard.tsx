@@ -1,29 +1,22 @@
+import { useEffect } from 'react';
 import type { ShopItem } from '../../models/ShopItem';
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import { AddToCartButton } from './AddToCartButton';
-import type { Category } from '../../models/Category';
-import { mockShopItems } from '../../testing/ShopItemMocking';
 
 interface ItemCardProps {
-  items?: ShopItem[];
+  items: ShopItem[];
   onItemClick?: (item: ShopItem) => void;
-  itemsFromCategory?: Category;
-  onlyNew?: boolean;
-  onlyHot?: boolean;
   isCarousel?: boolean;
 }
 
 export const ItemCard = ({
-  items: itemsProp,
+  items,
   onItemClick,
-  itemsFromCategory,
-  onlyNew,
-  onlyHot,
   isCarousel = false
 }: ItemCardProps) => {
 
-  const [ref] = useKeenSlider<HTMLDivElement>({
+  const [ref, instanceRef] = useKeenSlider<HTMLDivElement>({
     slides: {
       perView: 1.2,
       spacing: 10,
@@ -60,13 +53,9 @@ export const ItemCard = ({
     },
   });
 
-
-  const items = itemsProp ?? mockShopItems.filter(item => {
-    const categoryMatch = itemsFromCategory ? item.category!.id === itemsFromCategory.id : true;
-    const newMatch = onlyNew ? item.isNew === true : true;
-    const hotMatch = onlyHot ? item.isHot === true : true;
-    return categoryMatch && newMatch && hotMatch;
-  });
+  useEffect(() => {
+    if (isCarousel) instanceRef.current?.update();
+  }, [items]);
 
   return (
     <>

@@ -1,29 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "../components/pages/ShopPage/Header";
 import { Navigation } from "../components/common/Navigation/Navigation";
 import { TicketDisplay } from "../components/pages/Tombola/utils/TicketDisplay";
 import { TierSelectionCard } from "../components/pages/Tombola/utils/TierSelectionCard";
 import { TombolaInfoBox } from "../components/pages/Tombola/utils/TombolaInfoBox";
 import { useUser } from "../context/UserContext";
-import { getTombolaItemsByTier } from "../utils/tombolaUtils";
 import { TOMBOLA_TIERS } from "../constants/tombolaConstants";
-import type { TombolaReward, TombolaTier } from "../models/TombolaItem";
+import type { TombolaItem, TombolaReward, TombolaTier } from "../models/TombolaItem";
 import { Tombola } from "../components/pages/Tombola/Tombola";
-
+import { api } from "../services/api";
 
 export const TombolaPage = () => {
-  const { tombolaTickets, removeTombolaTickets } = useUser();
+  const { userId, tombolaTickets, refreshUser } = useUser();
   const [selectedTier, setSelectedTier] = useState<TombolaTier>(2);
+  const [tombolaItems, setTombolaItems] = useState<TombolaItem[]>([]);
 
-  const handleSpin = (reward: TombolaReward) => {
-    removeTombolaTickets(selectedTier);
+  useEffect(() => {
+    api.tombola.getItems(selectedTier)
+      .then(setTombolaItems)
+      .catch(err => console.error('Fehler beim Laden der Tombola-Items:', err));
+  }, [selectedTier]);
+
+  const handleSpin = async (reward: TombolaReward) => {
+    try {
+      await api.tombola.spin(selectedTier, userId);
+      await refreshUser();
+    } catch (err) {
+      console.error('Tombola-Spin fehlgeschlagen:', err);
+    }
 
     if (reward.item.isPenalty) {
-      // TODO: Show penalty notification to user
-      console.warn("Penalty received:", reward.item.penaltyText);
+      console.warn('Penalty received:', reward.item.penaltyText);
     } else {
-      // TODO: Add reward to user inventory
-      console.log("Reward won:", reward.item.shopItem?.name);
+      console.log('Reward won:', reward.item.shopItem?.name);
     }
   };
 
@@ -55,7 +64,7 @@ export const TombolaPage = () => {
           </div>
 
           <Tombola
-            items={getTombolaItemsByTier(selectedTier)}
+            items={tombolaItems}
             ticketCost={selectedTier}
             onSpin={handleSpin}
             availableTickets={tombolaTickets}

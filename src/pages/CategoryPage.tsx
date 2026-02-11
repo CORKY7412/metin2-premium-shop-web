@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import type { ShopItem } from "../models/ShopItem";
-import { mockShopItems } from "../testing/ShopItemMocking";
 import { Header } from "../components/pages/ShopPage/Header";
 import { Navigation } from "../components/common/Navigation/Navigation";
 import { ItemCard } from "../components/common/ItemCard";
@@ -9,40 +8,53 @@ import { Modal } from "../components/common/Modal/Modal";
 import { ItemDescriptionPage } from "./ItemDescriptionPage";
 import { SubNavigation } from "../components/pages/CategoryPage/SubNavigation";
 import { buildCategoryTree, filterItemsByCategory } from "../utils/categoryHelper";
+import { api } from "../services/api";
+
+let shopItemsCache: ShopItem[] | null = null;
+
+const filterByView = (items: ShopItem[], view: string | undefined): ShopItem[] => {
+  switch (view) {
+    case 'new': return items.filter(i => i.isNew === true);
+    case 'hot': return items.filter(i => i.isHot === true);
+    default:    return items;
+  }
+};
 
 export const CategoryPage = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ShopItem | null>(null);
-  const [allItems, setAllItems] = useState<ShopItem[]>([]);
-  const [filteredItems, setFilteredItems] = useState<ShopItem[]>([]);
+  const [allItems, setAllItems] = useState<ShopItem[]>(() =>
+    shopItemsCache ? filterByView(shopItemsCache, categoryId) : []
+  );
 
   const activeCategoryId = searchParams.get('cat') ? Number(searchParams.get('cat')) : undefined;
   const activeSubCategoryId = searchParams.get('sub') ? Number(searchParams.get('sub')) : undefined;
 
   useEffect(() => {
-    let items: ShopItem[] = [];
-    
-    switch (categoryId) {
-      case 'all':
-        items = mockShopItems;
-        break;
-      case 'new':
-        items = mockShopItems.filter(item => item.isNew === true);
-        break;
-      case 'hot':
-        items = mockShopItems.filter(item => item.isHot === true);
-        break;
-      default:
-        items = mockShopItems;
+    if (shopItemsCache) {
+      setAllItems(filterByView(shopItemsCache, categoryId));
+      return;
     }
-    
-    setAllItems(items);
+
+    api.shop.getItems()
+      .then(items => {
+        shopItemsCache = items;
+        setAllItems(filterByView(items, categoryId));
+      })
+      .catch(err => console.error('Fehler beim Laden der Items:', err));
   }, [categoryId]);
 
-  const categoryTree = buildCategoryTree(allItems);
+  const categoryTree = useMemo(() => buildCategoryTree(allItems), [allItems]);
+
+  const effectiveActiveCategoryId = activeCategoryId ?? categoryTree[0]?.category.id;
+
+  const filteredItems = useMemo(
+    () => filterItemsByCategory(allItems, effectiveActiveCategoryId, activeSubCategoryId),
+    [allItems, effectiveActiveCategoryId, activeSubCategoryId]
+  );
 
   useEffect(() => {
     if (!activeCategoryId && !activeSubCategoryId && categoryTree.length > 0) {
@@ -50,11 +62,6 @@ export const CategoryPage = () => {
       setSearchParams({ cat: firstCategory.category.id.toString() });
     }
   }, [activeCategoryId, activeSubCategoryId, categoryTree, setSearchParams]);
-
-  useEffect(() => {
-    const filtered = filterItemsByCategory(allItems, activeCategoryId, activeSubCategoryId);
-    setFilteredItems(filtered);
-  }, [allItems, activeCategoryId, activeSubCategoryId]);
 
   const handleItemClick = (item: ShopItem) => {
     setSelectedItem(item);
@@ -111,7 +118,7 @@ export const CategoryPage = () => {
             <div className="flex flex-col md:flex-row gap-2 md:gap-0">
               <SubNavigation
                 categories={categoryTree}
-                activeCategoryId={activeCategoryId}
+                activeCategoryId={effectiveActiveCategoryId}
                 activeSubCategoryId={activeSubCategoryId}
                 onCategoryClick={handleCategoryClick}
                 onSubCategoryClick={handleSubCategoryClick}

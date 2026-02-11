@@ -47,7 +47,10 @@ export const buildCategoryTree = (items: ShopItem[]): CategoryWithSubs[] => {
     }
   });
 
-  return Array.from(mainCategories.values());
+  const result = Array.from(mainCategories.values());
+  result.sort((a, b) => a.category.id - b.category.id);
+  result.forEach(entry => entry.subCategories.sort((a, b) => a.id - b.id));
+  return result;
 };
 
 
