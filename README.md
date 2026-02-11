@@ -27,6 +27,10 @@ A modern, responsive web application for a Metin2 premium item shop with an inte
 - Receive currency vouchers
 - Random chance for extra items
 
+### **RESTAPI integration & Mock data**
+- Services for a RESTAPI integration
+- Working without database using mockdata through env
+
 
 ### Setup
 After cloning the repository:
@@ -38,7 +42,7 @@ npm install
 npm run dev
 ```
 
-Check out vite for more infos
+By default, you receive mock data. This is controlled by the env.development file. Set ``VITE_USE_MOCK`` to ``false`` if you want to integrate your own database.
 
 ## Contributing
 
