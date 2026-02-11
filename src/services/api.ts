@@ -2,6 +2,7 @@ import type { ShopItem } from '../models/ShopItem';
 import type { Category } from '../models/Category';
 import type { CartItem, PurchaseReward } from '../models/Cart';
 import type { TombolaItem, TombolaTier } from '../models/TombolaItem';
+import { mockApi } from './mockApi';
 
 export const CURRENT_USER = 'testuser';
 
@@ -36,7 +37,7 @@ export interface UserBalance {
   yabbieCoins: number;
 }
 
-export const api = {
+const realApi = {
   shop: {
     getItems: (categoryId?: number): Promise<ShopItem[]> => {
       const url = categoryId ? `/shop/items?categoryId=${categoryId}` : '/shop/items';
@@ -76,3 +77,5 @@ export const api = {
       }),
   },
 };
+
+export const api = import.meta.env.VITE_USE_MOCK === 'true' ? mockApi : realApi;
